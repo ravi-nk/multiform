@@ -251,7 +251,7 @@ class database {
 global $db;
 
     $db = new database('localhost', 'root', '', 'multiform');
-
+ $db->rootpath='D:\\xampp\\htdocs\\multiple_form\\';
 
 //echo $db->sitepath."<br>";
 //echo $db->rootpath."<br>";

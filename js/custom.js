@@ -36,6 +36,11 @@ $(document).ready(function () {
                 onStepChanging: function (event, currentIndex, newIndex)
                 {
 //                     Allways allow previous action even if the current form is not valid!
+if($("#pwd").val() !== $("#cpwd").val()){
+	$("#error").html("password does not match");
+	return false;
+
+}
                     if (currentIndex > newIndex)
                     {
                         return true;
@@ -52,6 +57,7 @@ $(document).ready(function () {
                         form.find(".body:eq(" + newIndex + ") label.error").remove();
                         form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
                     }
+				
                     form.validate().settings.ignore = ":disabled,:hidden";
                     return form.valid();
                 },
@@ -107,23 +113,75 @@ $(document).ready(function () {
 
     
 
-$("#submit").on("click" , function(){
-	var fname = $("input[name='fname']").val();
+// $("#submit").on("click" , function(){
+	
+	
+	// var fname = $("input[name='fname']").val();
+	// var lname = $("input[name='lname']").val();
+	
+	// var pwd = $("input[name='pwd']").val();
+	// var cpwd = $("input[name='cpwd']").val();
+	// var file = $("input[type='file']").val();
+	
+	// alert(file);
+	
+	// var email = $("input[name='email']").val();
+	// var gender = $("#gender").val();
+	// if(pwd == cpwd){
+	 // $.post("controller/ajaxcontroller.php", {req_type: "datasubmit", fname: fname, lname: lname, pwd: pwd,
+	 // file:file,email:email,gender:gender},
+	
+                // function (result) {
+               // alert(result);
+                   
+				// })
+	// }
+	
+// });
+$(document).ready(function(){
+
+    $("#submit").click(function(){
+
+        var fd = new FormData();
+        var files = $('#pdf')[0].files;
+		var fname = $("input[name='fname']").val();
 	var lname = $("input[name='lname']").val();
 	
 	var pwd = $("input[name='pwd']").val();
 	var cpwd = $("input[name='cpwd']").val();
-	var file = $("input[name='pdf']").val();
 	var email = $("input[name='email']").val();
 	var gender = $("#gender").val();
-	if(pwd == cpwd){
-	 $.post("controller/ajaxcontroller.php", {req_type: "datasubmit", fname: fname, lname: lname, pwd: pwd,
-	 file:file,email:email,gender:gender},
-                function (result) {
-               alert(result);
-                   
-				})
-	}
+        alert(files);
+        // Check file selected or not
+        if(files.length > 0 ){
+           fd.append('file',files[0]);
+		   fd.append('fname',fname);
+		   fd.append('lname',lname);
+		   fd.append('pwd',pwd);
+		   fd.append('email',files[0]);
+		   fd.append('email',email);
+		   fd.append('gender',gender);
+
+           $.ajax({
+              url: 'controller/ajaxcontroller.php',
+              type: 'post',
+              data: fd ,
+              contentType: false,
+              processData: false,
+              success: function(response){
+				  alert(response);
+                 // if(response != 0){
+                    // $("#img").attr("src",response); 
+                    // $(".preview img").show(); // Display image element
+                 // }else{
+                    // alert('file not uploaded');
+                 // }
+              },
+           });
+        }else{
+           alert("Please select a file.");
+        }
+    });
 });
 
 });

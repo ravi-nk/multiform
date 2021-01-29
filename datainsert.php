@@ -113,7 +113,7 @@
 
     <div class="container">
 
-        <form id="form" class="my-3" enctype="multipart/form-data">
+        <form id="form" class="my-3" method="post" enctype="multipart/form-data">
 
 
 
@@ -134,22 +134,14 @@
                 </div>
 				<div class="form-group">
                     <label for="pwd">Password<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control form-control-sm" id="pwd" name="pwd" required>
+                    <input type="password" class="form-control form-control-sm" id="pwd" name="pwd" required>
                 </div>
 				<div class="form-group">
                     <label for="cpwd">Confirm Password<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control form-control-sm" id="cpwd" name="cpwd" required>
+                    <input type="password" class="form-control form-control-sm" id="cpwd" name="cpwd" required>
                 </div>
 				
-				
-
-                
-
-
-
-           
-
-                
+				<div id="error" class="text-danger"></div>
 
             </section>
 
@@ -167,7 +159,7 @@
 
                     <label for="pdf">File Upload<span class="text-danger">*</span></label>
 
-                    <input type="file" class="form-control form-control-sm" id="pdf" name="pdf"  accept="application/pdf" required>
+                    <input type="file" class="form-control form-control-sm" id="pdf" name="pdf"   required>
 
                 </div>
 
